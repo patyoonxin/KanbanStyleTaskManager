@@ -1,0 +1,139 @@
+/*CSS RESET*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%; /* 1rem = 10px */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body);
+  font-size: 1.6rem;
+  background-color: var(--color-primary);
+}
+
+/*DESIGN TOKENS*/
+:root {
+  --color-primary: #eef2ff;
+  --color-secondary: #0040ff;	/*blue*/
+  --color-secondary-light: #e0e7ff;
+  --color-white: #FFFFFF;	
+  --color-red:#ffd1d1;
+  --color-yellow:#f5f56a;
+  --color-yellow-light:#ffffbf;
+  --color-green:#0dff00;
+
+  --font-body: system-ui,"Segoe UI", sans-serif;
+
+  --space-sm: 0.4rem;
+  --space-md: 1.0rem;
+  --space-lg: 1.6rem;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  background: var(--color-white); 
+  padding: var(--space-md); 
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+h1 {
+  font-size: 2.6rem;
+  line-height: 1.2;
+  color: var(--color-secondary);
+}
+
+h2 {
+  font-size: 2rem;
+  line-height: 1.3;
+}
+
+.counter {
+  background: var(--color-secondary); 
+  color: var(--color-white);
+  margin: var(--space-md); 
+  padding: var(--space-sm) var(--space-md); 
+  border-radius: 20px;
+  font-size: 1.5rem; 
+  font-weight: bold;
+}
+
+.filter-priority{
+  border: 2px solid var(--color-primary); 
+  border-radius: 0.5rem;
+  padding: var(--space-md);
+  margin-left: auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  margin: var(--space-md); 
+  padding: var(--space-md); 
+  gap: var(--space-md);
+}
+
+.list{
+  background-color: var( --color-white);
+  border-radius:1.0rem;
+  margin: var(--space-md); 
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.smallheader-todo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+  border-left: 0.4rem solid var( --color-secondary);     
+  border-radius: 5px;     
+  padding: var(--space-md); 
+}
+
+.smallheader-inprogress {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+  border-left: 0.4rem solid var( --color-yellow);     
+  border-radius: 5px;     
+  padding: var(--space-md); 
+}
+
+.smallheader-done {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+  border-left: 0.4rem solid var( --color-green);     
+  border-radius: 5px;     
+  padding: var(--space-md); 
+}
+
+.addBtn{
+  background: var(--color-secondary); 
+  color: var(--color-white);
+  padding: var(--space-md) ; 
+  border-radius: 10px;
+  font-size: 1.3rem; 
+  font-weight: bold;
+  border: none;
+}
+
+.fade-out {
+    animation: fadeOut 0.3s forwards;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+}
+
+.is-hidden {
+    display: none;
+}

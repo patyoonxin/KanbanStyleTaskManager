@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+	<title>Kanban Style Task Manager</title>
+</head>
+<body>
+	<header>
+		<h1>&#128203; My Task Board</h1>
+		<div class="counter" id="noteCounter">0 tasks</div>
+		<select class="filter-priority" name="filter-priority" id="filter-priority">
+			<option value="all">All</option>
+			<option value="high">High</option>
+			<option value="medium">Medium</option>
+			<option value="low">Low</option>
+		</select>
+	</header>
+
+	<div class="grid">
+		<section id="todo" class="list">
+			<div class="smallheader-todo">
+				<h2>&#128221; To Do</h2>
+				<button class="addBtn" data-column="todo">+ Add Task</button>
+			</div>
+			<ul class="todolist"></ul>
+			
+		</section>
+
+		<section id="inprogress" class="list">
+			<div class="smallheader-inprogress">
+				<h2>&#128336; In Progress</h2>
+				<button class="addBtn" data-column="inprogress">+ Add Task</button>
+			</div>
+			<ul class="inprogresslist"></ul>
+		</section>
+
+		<section id="done" class="list">
+			<div class="smallheader-done">
+				<h2>&#128267; Done</h2>
+				<button class="addBtn" data-column="done">+ Add Task</button>
+			</div>
+			<ul class="donelist"></ul>
+			<button id="clearDone">Clear All</button>
+		</section>
+	</div>
+
+	<div id="taskModal" class="modal" style="display: none;">
+		<div class="modal-content">
+			<label for="title">📌 Title</label>
+			<input type="text" id="title" placeholder="e.g., DOM practice">
+			<label for="description">Description</label>
+			<textarea id="description" placeholder="Hello World!"></textarea>
+			<label for="priority">Priority</label>
+			<select name="priority" id="priority">
+				<option value="high">High</option>
+				<option value="medium">Medium</option>
+				<option value="low">Low</option>
+			</select>
+			<label for="due-date">Due Date:</label>
+			<input type="date" id="duedate">
+			<button id="saveBtn">Save</button>
+			<button id="cancelBtn">Cancel</button>
+		</div>
+	</div>
+	<script src="taskmanager.js"></script>
+</body>
+</html>
