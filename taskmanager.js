@@ -3,23 +3,93 @@ let currentEditId = null;
 let currentColumn = "todo";
 
 /* =========================
+   EVENT DELEGATION (EDIT/DELETE)
+========================= */
+document.querySelectorAll("section ul").forEach(ul => {
+    ul.addEventListener("click", (e) => {
+        const action = e.target.getAttribute("data-action");
+        const id = e.target.getAttribute("data-id");
+
+        if (!action || !id) return;
+
+        if (action === "edit") {
+            editTask(id);
+        } else if (action === "delete") {
+            deleteTask(id);
+        }
+    });
+});
+
+/* =========================
+   ADD BUTTON (ALL COLUMNS)
+========================= */
+document.querySelectorAll(".addBtn").forEach(btn => {
+    btn.addEventListener("click", () => {
+        currentColumn = btn.dataset.column || "todo";
+        currentEditId = null;
+
+        // clear form
+        document.getElementById("title").value = "";
+        document.getElementById("description").value = "";
+        document.getElementById("priority").value = "medium";
+        document.getElementById("duedate").value = "";
+
+        document.getElementById("taskModal").style.display = "block";
+    });
+});
+
+/* =========================
    CREATE TASK CARD
 ========================= */
 function createTaskCard(taskObj) {
     const li = document.createElement("li");
     li.classList.add("task-card");
-    li.dataset.id = taskObj.id;
+    li.setAttribute("data-id", taskObj.id);
 
-    li.innerHTML = `
-        <h3 class="task-title">${taskObj.title}</h3>
-        <p>${taskObj.description}</p>
-        <span class="badge ${taskObj.priority}">${taskObj.priority}</span>
-        <small>Due: ${taskObj.dueDate}</small>
-        <div class="actions">
-            <button data-action="edit" data-id="${taskObj.id}">Edit</button>
-            <button data-action="delete" data-id="${taskObj.id}">Delete</button>
-        </div>
-    `;
+    // Title
+    const title = document.createElement("h3");
+    title.classList.add("task-title");
+    title.textContent = taskObj.title;
+
+    // Description
+    const desc = document.createElement("p");
+    desc.textContent = taskObj.description;
+
+    // Priority badge
+    const badge = document.createElement("span");
+    badge.classList.add("badge", taskObj.priority);
+    badge.textContent = taskObj.priority;
+
+    // Due date
+    const due = document.createElement("small");
+    due.textContent = "Due: " + taskObj.dueDate;
+
+    // Action container
+    const actions = document.createElement("div");
+    actions.classList.add("actions");
+
+    // Edit button
+    const editBtn = document.createElement("button");
+    editBtn.textContent = "Edit";
+    editBtn.setAttribute("data-action", "edit");
+    editBtn.setAttribute("data-id", taskObj.id);
+
+    // Delete button
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Delete";
+    deleteBtn.setAttribute("data-action", "delete");
+    deleteBtn.setAttribute("data-id", taskObj.id);
+
+    // Append buttons to actions
+    actions.appendChild(editBtn);
+    actions.appendChild(deleteBtn);
+
+    // Append everything to li
+    li.appendChild(title);
+    li.appendChild(desc);
+    li.appendChild(badge);
+    li.appendChild(due);
+    li.appendChild(actions);
 
     return li;
 }
@@ -94,6 +164,75 @@ function updateCounter() {
     const counter = document.getElementById("noteCounter");
     counter.textContent = `${tasks.length} tasks`;
 }
+
+/* =========================
+   INLINE EDIT (DOUBLE CLICK)
+========================= */
+document.addEventListener("dblclick", (e) => {
+    if (!e.target.classList.contains("task-title")) return;
+
+    const titleEl = e.target;
+    const li = titleEl.closest("li");
+    const taskId = li.dataset.id;
+
+    const input = document.createElement("input");
+    input.type = "text";
+    input.value = titleEl.textContent;
+
+    titleEl.replaceWith(input);
+    input.focus();
+
+    function saveEdit() {
+        const newTitle = input.value.trim();
+        if (!newTitle) return;
+
+        updateTask(taskId, { title: newTitle });
+    }
+
+    input.addEventListener("blur", saveEdit);
+    input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") saveEdit();
+    });
+});
+
+/* =========================
+   PRIORITY FILTER
+========================= */
+document.getElementById("filter-priority").addEventListener("change", (e) => {
+    const selected = e.target.value;
+
+    document.querySelectorAll(".task-card").forEach(card => {
+        const task = tasks.find(t => t.id === card.dataset.id);
+        if (!task) return;
+
+        const shouldHide = selected !== "all" && task.priority !== selected;
+        card.classList.toggle("is-hidden", shouldHide);
+    });
+});
+
+/* =========================
+   CLEAR DONE (STAGGER)
+========================= */
+document.getElementById("clearDone").addEventListener("click", () => {
+    const doneList = document.querySelector("#done ul");
+    if (!doneList) return;
+
+    const cards = doneList.querySelectorAll(".task-card");
+
+    cards.forEach((card, index) => {
+        setTimeout(() => {
+            card.classList.add("fade-out");
+
+            card.addEventListener("animationend", () => {
+                const id = card.dataset.id;
+                tasks = tasks.filter(t => t.id !== id);
+                card.remove();
+                updateCounter();
+            }, { once: true });
+
+        }, index * 100);
+    });
+});
 
 /* =========================
    SAVE BUTTON
