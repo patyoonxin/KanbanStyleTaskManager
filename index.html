@@ -12,9 +12,9 @@
 		<div class="counter" id="noteCounter">0 tasks</div>
 		<select class="filter-priority" name="filter-priority" id="filter-priority">
 			<option value="all">All</option>
-			<option value="high">High</option>
-			<option value="medium">Medium</option>
-			<option value="low">Low</option>
+			<option value="High">High</option>
+			<option value="Medium">Medium</option>
+			<option value="Low">Low</option>
 		</select>
 	</header>
 
@@ -42,26 +42,29 @@
 				<button class="addBtn" data-column="done">+ Add Task</button>
 			</div>
 			<ul class="donelist"></ul>
-			<button id="clearDone">Clear All</button>
+			<button id="clearDone" class="clearBtn">Clear All</button>
 		</section>
 	</div>
 
-	<div id="taskModal" class="modal" style="display: none;">
+	<div id="taskModal" class="modal">
 		<div class="modal-content">
-			<label for="title">📌 Title</label>
-			<input type="text" id="title" placeholder="e.g., DOM practice">
-			<label for="description">Description</label>
-			<textarea id="description" placeholder="Hello World!"></textarea>
-			<label for="priority">Priority</label>
+			<label for="title">Title: </label><br>
+			<input type="text" id="title" placeholder="e.g., DOM practice"><br>
+			<label for="description">Description: </label><br>
+			<textarea id="description" placeholder="Hello World!"></textarea><br>
+			<label for="priority">Priority: </label><br>
 			<select name="priority" id="priority">
-				<option value="high">High</option>
-				<option value="medium">Medium</option>
-				<option value="low">Low</option>
-			</select>
-			<label for="due-date">Due Date:</label>
-			<input type="date" id="duedate">
-			<button id="saveBtn">Save</button>
-			<button id="cancelBtn">Cancel</button>
+				<option value="High">High</option>
+				<option value="Medium">Medium</option>
+				<option value="Low">Low</option>
+			</select><br>
+			<label for="due-date">Due Date: </label>
+			<input type="date" id="duedate"><br>
+			<div class="action">
+				<button id="saveBtn" class="saveBtn">Save</button>
+				<button id="cancelBtn" class="cancelBtn">Cancel</button>
+			</div>
+			
 		</div>
 	</div>
 	<script src="taskmanager.js"></script>

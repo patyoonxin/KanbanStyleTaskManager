@@ -31,7 +31,7 @@ document.querySelectorAll(".addBtn").forEach(btn => {
         // clear form
         document.getElementById("title").value = "";
         document.getElementById("description").value = "";
-        document.getElementById("priority").value = "medium";
+        document.getElementById("priority").value = "Medium";
         document.getElementById("duedate").value = "";
 
         document.getElementById("taskModal").style.display = "block";
@@ -45,6 +45,9 @@ function createTaskCard(taskObj) {
     const li = document.createElement("li");
     li.classList.add("task-card");
     li.setAttribute("data-id", taskObj.id);
+
+    const containerCard = document.createElement("div");
+    containerCard.classList.add("containerCard");
 
     // Title
     const title = document.createElement("h3");
@@ -70,24 +73,28 @@ function createTaskCard(taskObj) {
 
     // Edit button
     const editBtn = document.createElement("button");
+    editBtn.classList.add("editBtn");
     editBtn.textContent = "Edit";
     editBtn.setAttribute("data-action", "edit");
     editBtn.setAttribute("data-id", taskObj.id);
 
     // Delete button
     const deleteBtn = document.createElement("button");
+    deleteBtn.classList.add("deleteBtn");
     deleteBtn.textContent = "Delete";
     deleteBtn.setAttribute("data-action", "delete");
     deleteBtn.setAttribute("data-id", taskObj.id);
+
+    containerCard.appendChild(title);
+    containerCard.appendChild(badge);
 
     // Append buttons to actions
     actions.appendChild(editBtn);
     actions.appendChild(deleteBtn);
 
     // Append everything to li
-    li.appendChild(title);
+    li.appendChild(containerCard);
     li.appendChild(desc);
-    li.appendChild(badge);
     li.appendChild(due);
     li.appendChild(actions);
 

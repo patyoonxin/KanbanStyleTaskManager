@@ -23,10 +23,13 @@ body {
   --color-secondary: #0040ff;	/*blue*/
   --color-secondary-light: #e0e7ff;
   --color-white: #FFFFFF;	
-  --color-red:#ffd1d1;
-  --color-yellow:#f5f56a;
+  --color-red:#DC143C;
+  --color-red-light:#ffd1d1;
+  --color-yellow:#FFD700;
   --color-yellow-light:#ffffbf;
-  --color-green:#0dff00;
+  --color-green:#32CD32;
+  --color-green-light:#98FB98;
+  --color-gray: #A9A9A9;
 
   --font-body: system-ui,"Segoe UI", sans-serif;
 
@@ -54,6 +57,29 @@ h2 {
   line-height: 1.3;
 }
 
+ul{
+  list-style-type: none; /* Remove bullets */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margins */
+}
+
+p{
+  margin:var(--space-sm) var(--space-md);;
+  color: var(--color-gray);
+  padding: 0 var(--space-sm);
+}
+
+small{
+  margin:var(--space-md);;
+  color: var(--color-gray);
+  padding: 0 var(--space-sm);
+  font-weight:  bold;
+}
+
+button{
+  cursor: pointer;
+}
+
 .counter {
   background: var(--color-secondary); 
   color: var(--color-white);
@@ -73,7 +99,8 @@ h2 {
 
 .grid {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: start; /* This stops the stretching! */
   margin: var(--space-md); 
   padding: var(--space-md); 
   gap: var(--space-md);
@@ -121,6 +148,150 @@ h2 {
   font-size: 1.3rem; 
   font-weight: bold;
   border: none;
+}
+
+.task-card{
+  margin: var(--space-md);
+  padding: var(--space-sm);
+  border-radius: 10px;
+  box-shadow: 0 0 12px var( --color-secondary-light);
+}
+
+.containerCard{
+  display:flex;
+  margin: 0;
+  padding: 0;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.badge{
+  margin:var(--space-md);
+  padding: var(--space-sm);
+  border-radius: 10px;
+  border: none;
+  font-size: 1.3rem; 
+  font-weight: bold;
+}
+
+.High{
+  background-color: var(--color-red-light);
+  color:var(--color-red);
+}
+
+.Medium{
+  background-color: var(--color-yellow-light);
+  color:var(--color-yellow);
+}
+
+.Low{
+  background-color: var(--color-green-light);
+  color:var(--color-green);
+}
+
+.task-title{
+  margin:var(--space-sm) var(--space-md);
+  padding: var(--space-sm);
+}
+
+.editBtn{
+  margin:var(--space-md);
+  padding: var(--space-md) ; 
+  border-radius: 10px;
+  font-size: 1.3rem; 
+  font-weight: bold;
+  border: none;
+  color:var( --color-secondary);
+  background-color: var(--color-secondary-light);
+}
+
+.deleteBtn{
+  margin:var(--space-md) 0;
+  padding: var(--space-md) ; 
+  border-radius: 10px;
+  font-size: 1.3rem; 
+  font-weight: bold;
+  border: none;
+  color:var( --color-red);
+  background-color: var(--color-red-light);
+}
+
+.clearBtn{
+  margin:var(--space-md) var( --space-lg);
+  padding: var(--space-md) ; 
+  border-radius: 10px;
+  font-size: 1.3rem; 
+  font-weight: bold;
+  border: none;
+  color:var( --color-red);
+  background-color: var(--color-red-light);
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 50px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+  background-color: var(--color-secondary-light);
+  margin: auto;
+  padding: var( --space-lg);  
+  width: 50%;
+  border-radius: 1.0rem;
+}
+
+label{
+  margin: var(--space-md);
+  font-weight: bold;
+}
+
+.modal input, .modal textarea, .modal select {
+  padding: var(--space-md);   
+  margin: var(--space-md);
+  border: 0.2rem solid var(--color-white);
+  border-radius:  0.5rem;
+  width: 98%;
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+.modal input:focus, .modal textarea:focus, .modal select:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-secondary );  
+}
+
+.action{   
+  margin: var(--space-md);
+}
+
+.saveBtn{
+  padding: var(--space-md) ; 
+  border-radius: 10px;
+  font-size: 1.3rem; 
+  font-weight: bold;
+  border: none;
+  color:var( --color-white);
+  background-color: var(--color-secondary);
+}
+
+.cancelBtn{
+  margin-left: var( --space-md);
+  padding: var(--space-md) ; 
+  border-radius: 10px;
+  font-size: 1.3rem; 
+  font-weight: bold;
+  border: none;
+  color:var( --color-red);
+  background-color: var(--color-red-light);
 }
 
 .fade-out {
