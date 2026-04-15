@@ -308,3 +308,9 @@ label{
 .is-hidden {
     display: none;
 }
+
+@media (max-width: 700px) {
+  .grid { 
+    grid-template-columns: 1fr !important; 
+  }
+}
